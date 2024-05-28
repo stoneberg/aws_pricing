@@ -101,8 +101,8 @@ const Search = ({ onSearch }) => {
 
   return (
     <div className="container mx-auto p-4 relative">
-      <h1 className="text-3xl font-bold text-center mb-4">
-        Amazon EC2 Service Search
+      <h1 className="text-6xl font-bold text-blue-500 text-center mt-5 mb-10">
+        AWS Service Search
       </h1>
       <div className="mb-4 flex items-center">
         <div className="mr-4">
