@@ -1,4 +1,4 @@
-// components/LoadingIndicator.js
+// components/LoadingIndicator.jsx
 import React from "react";
 
 const LoadingIndicator = () => {
