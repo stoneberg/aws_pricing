@@ -1,0 +1,189 @@
+{
+	"info": {
+		"_postman_id": "d725fdf7-c45f-4104-b41b-398b77e03254",
+		"name": "AWS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "1884457"
+	},
+	"item": [
+		{
+			"name": "Backend-Pricing",
+			"item": [
+				{
+					"name": "가격조회",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"serviceCode\": \"AmazonEC2\",\r\n \"filters\": [\r\n    {\r\n      \"Type\": \"TERM_MATCH\",\r\n      \"Field\": \"instanceType\",\r\n      \"Value\": \"m5.large\"\r\n    }\r\n  ],\r\n  \"region\": \"us-east-1\" // 요청을 특정 리전으로 변경\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/search",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"search"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "가격조회2",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"serviceCode\": \"AmazonRDS\",\r\n \"filters\": [\r\n    {\r\n      \"Type\": \"TERM_MATCH\",\r\n      \"Field\": \"instanceType\",\r\n      \"Value\": \"db.c6gd.xlarge\"\r\n    }\r\n  ],\r\n  \"region\": \"us-east-1\" // 요청을 특정 리전으로 변경\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/search",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"search"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "리전 리스트",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/aws-regions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"aws-regions"
+							],
+							"query": [
+								{
+									"key": "region_name",
+									"value": "us-east-1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "서비스 리스트 조회",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/aws-services?region=us-east-1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"aws-services"
+							],
+							"query": [
+								{
+									"key": "region",
+									"value": "us-east-1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "필터링 속성 목록",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/aws-service-attributes?service_code=AmazonEC2&region=us-east-1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"aws-service-attributes"
+							],
+							"query": [
+								{
+									"key": "service_code",
+									"value": "AmazonEC2"
+								},
+								{
+									"key": "region",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "region",
+									"value": "us-east-1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "필터링 속성 값",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/aws-attribute-values?service_code=AmazonEC2&attribute_name=instanceType&region=us-east-1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"aws-attribute-values"
+							],
+							"query": [
+								{
+									"key": "service_code",
+									"value": "AmazonEC2"
+								},
+								{
+									"key": "attribute_name",
+									"value": "instanceType"
+								},
+								{
+									"key": "region",
+									"value": "us-east-1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
