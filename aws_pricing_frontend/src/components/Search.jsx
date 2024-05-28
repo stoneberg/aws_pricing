@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import {
   getRegions,
   getAttributes,
   getAttributeValues,
   searchProducts,
 } from "../services/api";
+import LoadingIndicator from "./LoadingIndicator";
 
 const Search = ({ onSearch }) => {
   const [regions, setRegions] = useState([]);
@@ -17,19 +18,29 @@ const Search = ({ onSearch }) => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    getRegions().then((response) => {
-      const regionsData = response.data.map((region) => ({
-        name: region.RegionName,
-        endpoint: region.Endpoint,
-      }));
-      setRegions(regionsData);
-    });
+    setLoading(true);
+    getRegions()
+      .then((response) => {
+        const regionsData = response.data.map((region) => ({
+          name: region.RegionName,
+          endpoint: region.Endpoint,
+        }));
+        setRegions(regionsData);
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
   }, []);
 
   const handleRegionChange = (e) => {
     const region = e.target.value;
     setSelectedRegion(region);
-    getAttributes(region).then((response) => setAttributes(response.data));
+    setLoading(true);
+    getAttributes(region)
+      .then((response) => {
+        setAttributes(response.data);
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
   };
 
   const handleServiceCodeChange = (e) => {
@@ -42,15 +53,17 @@ const Search = ({ onSearch }) => {
     setFilters(newFilters);
 
     if (type === "field") {
-      getAttributeValues(selectedServiceCode, value, selectedRegion).then(
-        (response) => {
+      setLoading(true);
+      getAttributeValues(selectedServiceCode, value, selectedRegion)
+        .then((response) => {
           const newAttributeValues = {
             ...attributeValues,
             [index]: response.data,
           };
           setAttributeValues(newAttributeValues);
-        }
-      );
+          setLoading(false);
+        })
+        .catch(() => setLoading(false));
     }
   };
 
@@ -78,16 +91,18 @@ const Search = ({ onSearch }) => {
         Value: f.value,
       })),
     };
-    searchProducts(searchCriteria).then((response) => {
-      onSearch(response.data.PriceList);
-      setLoading(false);
-    });
+    searchProducts(searchCriteria)
+      .then((response) => {
+        onSearch(response.data.PriceList);
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
   };
 
   return (
     <div className="container mx-auto p-4 relative">
-      <h1 className="text-5xl font-bold text-center text-blue-500 mt-10 mb-20">
-        AWS Service Search
+      <h1 className="text-3xl font-bold text-center mb-4">
+        Amazon EC2 Service Search
       </h1>
       <div className="mb-4 flex items-center">
         <div className="mr-4">
@@ -184,14 +199,7 @@ const Search = ({ onSearch }) => {
         >
           Search
         </button>
-        {loading && (
-          <div className="fixed inset-0 flex items-center justify-center bg-white bg-opacity-75 z-50">
-            <div className="flex flex-col items-center">
-              <div className="w-16 h-16 border-4 border-blue-500 border-t-transparent border-solid rounded-full animate-spin"></div>
-              <p className="mt-4 text-xl">Loading...</p>
-            </div>
-          </div>
-        )}
+        {loading && <LoadingIndicator />}
       </div>
     </div>
   );
