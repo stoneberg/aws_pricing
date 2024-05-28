@@ -5,15 +5,21 @@ const Result = ({ results }) => {
   return (
     <div className="container mx-auto p-4">
       {results.length > 0 ? (
-        <table className="table-auto w-full border-collapse">
-          <thead>
+        <table className="table-auto w-full border-collapse bg-white border border-gray-300">
+          <thead className="bg-pink-500 text-white">
             <tr>
-              <th className="border px-4 py-2">Instance Type</th>
-              <th className="border px-4 py-2">Location</th>
-              <th className="border px-4 py-2">Operating System</th>
-              <th className="border px-4 py-2">vCPU</th>
-              <th className="border px-4 py-2">Memory</th>
-              <th className="border px-4 py-2">Price per Hour (USD)</th>
+              <th className="border border-gray-300 px-4 py-2">
+                Instance Type
+              </th>
+              <th className="border border-gray-300 px-4 py-2">Location</th>
+              <th className="border border-gray-300 px-4 py-2">
+                Operating System
+              </th>
+              <th className="border border-gray-300 px-4 py-2">vCPU</th>
+              <th className="border border-gray-300 px-4 py-2">Memory</th>
+              <th className="border border-gray-300 px-4 py-2">
+                Price per Hour (USD)
+              </th>
             </tr>
           </thead>
           <tbody>
