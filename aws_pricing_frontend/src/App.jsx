@@ -1,7 +1,7 @@
 // src/App.js
 import { useState } from "react";
 import Search from "./components/Search";
-import Result from "./components/Results";
+import Result from "./components/Result";
 
 function App() {
   const [results, setResults] = useState([]);

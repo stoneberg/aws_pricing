@@ -85,11 +85,13 @@ const Search = ({ onSearch }) => {
     const searchCriteria = {
       region: selectedRegion,
       serviceCode: selectedServiceCode,
-      filters: filters.map((f) => ({
-        Type: "TERM_MATCH",
-        Field: f.field,
-        Value: f.value,
-      })),
+      filters: filters
+        .filter((f) => f.field && f.value) // Only include filters with both field and value
+        .map((f) => ({
+          Type: "TERM_MATCH",
+          Field: f.field,
+          Value: f.value,
+        })),
     };
     searchProducts(searchCriteria)
       .then((response) => {

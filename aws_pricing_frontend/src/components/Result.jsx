@@ -8,6 +8,7 @@ const Result = ({ results }) => {
         <table className="table-auto w-full border-collapse bg-white border border-gray-300">
           <thead className="bg-pink-500 text-white">
             <tr>
+              <th className="border border-gray-300 px-4 py-2">No.</th>
               <th className="border border-gray-300 px-4 py-2">
                 Instance Type
               </th>
@@ -25,6 +26,7 @@ const Result = ({ results }) => {
           <tbody>
             {results.map((result, index) => (
               <tr key={index} className="hover:bg-gray-100">
+                <td className="border px-4 py-2 text-center">{index + 1}</td>
                 <td className="border px-4 py-2">{result.instanceType}</td>
                 <td className="border px-4 py-2">{result.location}</td>
                 <td className="border px-4 py-2">{result.operatingSystem}</td>
