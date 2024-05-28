@@ -47,8 +47,7 @@ def list_aws_services():
 # AWS 서비스의 속성 목록을 가져오는 API
 @app.route('/aws-service-attributes')
 def list_service_attributes():
-    # service_code = request.args.get('service_code', 'AmazonEC2')
-    service_code = 'AmazonEC2'
+    service_code = request.args.get('service_code', 'AmazonEC2')
     region = request.args.get('region', 'us-east-1')
     
     if not service_code:
